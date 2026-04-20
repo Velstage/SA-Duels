@@ -1,0 +1,144 @@
+/* ============================================================
+   SA DUELS — 공통 스타일시트  sa.css
+   ============================================================ */
+
+/* ── 리셋 ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── 변수 ── */
+:root {
+  --bg:       #111114;
+  --bg2:      #1a1a1f;
+  --bg3:      #222228;
+  --border:   #2e2e38;
+  --text:     #c8c8d0;
+  --text-sub: #666672;
+  --text-dim: #44444e;
+  --gold:     #c9a84c;
+  --gold-dim: #5a4a1e;
+  --win:      #c0392b;
+  --lose:     #2980b9;
+  --radius:   6px;
+  --font:     'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', sans-serif;
+}
+
+/* ── 바디 ── */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── 사이트 헤더 ── */
+.site-header {
+  background: #0d0d10;
+  border-bottom: 1px solid var(--border);
+  padding: 12px 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.site-logo {
+  color: var(--gold);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-decoration: none;
+}
+.site-divider { color: var(--border); }
+.site-breadcrumb {
+  color: var(--text-sub);
+  font-size: 12px;
+  text-decoration: none;
+}
+.site-breadcrumb:hover { color: var(--gold); }
+
+/* ── 페이지 컨테이너 ── */
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 40px;
+}
+
+/* ── 섹션 헤더 ── */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.section-title {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  white-space: nowrap;
+}
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.section-count {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+}
+
+/* ── 패널 ── */
+.panel {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.panel-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 3px;
+}
+.panel-body {
+  padding: 20px 16px;
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.85;
+}
+
+/* ── 승패 배지  (.badge.win / .badge.lose) ── */
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 2px;
+  letter-spacing: 1px;
+}
+.badge.win  { background: rgba(192,57,43,0.2);  color: #e57373; border: 1px solid rgba(192,57,43,0.4); }
+.badge.lose { background: rgba(41,128,185,0.2); color: #5b9bd5; border: 1px solid rgba(41,128,185,0.4); }
+.badge.draw { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+
+/* ── 승패 사이드바 (record-cell 좌측 컬러 바) ── */
+.result-bar       { display: block; }
+.result-bar.win   { background: var(--win); }
+.result-bar.lose  { background: var(--lose); }
+.result-bar.draw  { background: var(--gold); }
+
+/* ── 상태 메시지 (로딩/에러) ── */
+.status-msg {
+  padding: 64px 0;
+  text-align: center;
+  color: var(--text-sub);
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+/* ── 반응형 공통 ── */
+@media (max-width: 640px) {
+  .site-header { padding: 12px 20px; }
+  .page { padding: 32px 20px; }
+}

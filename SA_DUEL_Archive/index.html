@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SA DUELS</title>
+<link rel="stylesheet" href="sa.css">
+<style>
+  body { display: flex; flex-direction: column; }
+
+  .hero {
+    padding: 96px 40px 80px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: 'SA DUELS';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(80px, 18vw, 220px);
+    font-weight: 900;
+    color: rgba(201,168,76,0.04);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero-eyebrow { font-size: 11px; letter-spacing: 4px; color: var(--gold); margin-bottom: 20px; }
+  .hero-title {
+    font-size: clamp(32px, 6vw, 64px);
+    font-weight: 900;
+    color: #eeeef2;
+    letter-spacing: 6px;
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+  .hero-desc { font-size: 13px; color: var(--text-sub); max-width: 480px; margin: 0 auto; line-height: 1.9; }
+
+  .nav-section { flex: 1; padding: 64px 40px; max-width: 960px; margin: 0 auto; width: 100%; }
+  .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .nav-card {
+    display: block;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 40px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .nav-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+  .nav-card:hover { border-color: var(--gold-dim); background: var(--bg3); }
+  .nav-card:hover::after { transform: scaleX(1); }
+  .nav-card-tag   { font-size: 10px; letter-spacing: 3px; color: var(--gold); margin-bottom: 16px; }
+  .nav-card-title { font-size: 22px; font-weight: 700; color: #eeeef2; letter-spacing: 1px; margin-bottom: 10px; }
+  .nav-card-desc  { font-size: 12px; color: var(--text-sub); line-height: 1.8; }
+  .nav-card-arrow {
+    position: absolute; top: 40px; right: 40px;
+    font-size: 18px; color: var(--text-dim);
+    transition: color 0.2s, transform 0.2s;
+  }
+  .nav-card:hover .nav-card-arrow { color: var(--gold); transform: translateX(4px); }
+
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-sub);
+    letter-spacing: 1px;
+  }
+  @media (max-width: 640px) {
+    .nav-grid { grid-template-columns: 1fr; }
+    .hero { padding: 64px 24px 56px; }
+    .nav-section { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="site-logo">SA DUELS</a>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">OFFICIAL ARCHIVE SYSTEM</div>
+  <h1 class="hero-title">SA DUELS</h1>
+  <p class="hero-desc">
+    전쟁의 여신이 주최하는 세계 간 1대1 결투 리그.<br>
+    SA 듀얼 협회 공식 아카이브 시스템.
+  </p>
+</div>
+
+<div class="nav-section">
+  <div class="section-header">
+    <span class="section-title">ARCHIVE</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="nav-grid">
+    <a class="nav-card" href="SA/index.html">
+      <div class="nav-card-tag">◈ DATABASE</div>
+      <div class="nav-card-title">사도 아카이브</div>
+      <div class="nav-card-desc">등록된 모든 사도(Sacred Agent)의<br>프로필과 능력, 전적을 기록합니다.</div>
+      <span class="nav-card-arrow">→</span>
+    </a>
+    <a class="nav-card" href="Archives/index.html">
+      <div class="nav-card-tag">◈ RECORDS</div>
+      <div class="nav-card-title">배틀 아카이브</div>
+      <div class="nav-card-desc">모든 공식 듀얼의 기록과<br>장면별 상세 리포트를 열람합니다.</div>
+      <span class="nav-card-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <span>SA DUELS — Sacred Agent Duels</span>
+  <span>SA 듀얼 협회 아카이브 부서</span>
+</footer>
+
+</body>
+</html>

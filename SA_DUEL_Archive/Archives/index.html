@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>배틀 아카이브 — SA DUELS</title>
+<link rel="stylesheet" href="../sa.css">
+<style>
+  .battle-list { display: flex; flex-direction: column; gap: 2px; }
+
+  .battle-row {
+    display: grid;
+    grid-template-columns: 6px 120px 1fr 110px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s;
+    align-items: stretch;
+  }
+  .battle-row:hover { border-color: var(--gold); }
+
+  .battle-thumb {
+    width: 120px;
+    aspect-ratio: 2 / 3;
+    object-fit: cover; object-position: top;
+    display: block;
+    background: var(--bg3);
+    border-right: 1px solid var(--border);
+  }
+  .battle-info {
+    padding: 20px 24px;
+    display: flex; flex-direction: column; gap: 6px; justify-content: center;
+  }
+  .battle-code    { font-size: 10px; color: var(--text-sub); letter-spacing: 2px; }
+  .battle-matchup { font-size: 16px; font-weight: 700; color: #eeeef2; }
+  .battle-tag     { font-size: 10px; color: var(--text-sub); letter-spacing: 1px; }
+
+  .battle-result-col {
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 20px;
+    border-left: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    .battle-row { grid-template-columns: 6px 80px 1fr; }
+    .battle-result-col { display: none; }
+    .battle-thumb { width: 80px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo">SA DUELS</a>
+  <span class="site-divider">/</span>
+  <span class="site-breadcrumb">배틀 아카이브</span>
+</header>
+
+<main class="page">
+  <div class="section-header">
+    <span class="section-title">BATTLE RECORDS</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="section-count" id="count"></div>
+  <div class="battle-list" id="list">
+    <div class="status-msg">로딩 중...</div>
+  </div>
+</main>
+
+<script src="../manifest.js"></script>
+<script>
+  const list    = document.getElementById('list');
+  const count   = document.getElementById('count');
+  const battles = SA_MANIFEST.battles;
+
+  const LABEL = { win: '홈 승리', lose: '홈 패배', draw: '무승부' };
+
+  count.textContent = `총 ${battles.length}전 기록`;
+  list.innerHTML = '';
+
+  if (!battles.length) {
+    list.innerHTML = '<div class="status-msg">기록된 배틀이 없습니다.</div>';
+  } else {
+    battles.forEach(b => {
+      const rc    = b.home_result || 'draw';
+      const label = LABEL[rc] ?? rc;
+
+      const row = document.createElement('a');
+      row.className = 'battle-row';
+      row.href = `battle_viewer.html?code=${b.code}`;
+      row.innerHTML = `
+        <div class="result-bar ${rc}"></div>
+        <img class="battle-thumb" src="${b.folder}/${b.thumb}" alt="${b.code}" onerror="this.style.opacity=0">
+        <div class="battle-info">
+          <div class="battle-code">${b.code} · HOME: ${b.home_name ?? b.home}</div>
+          <div class="battle-matchup">${b.matchup}</div>
+          <div class="battle-tag">AWAY: ${b.away_name ?? b.away}</div>
+        </div>
+        <div class="battle-result-col">
+          <span class="badge ${rc}">${label}</span>
+        </div>`;
+      list.appendChild(row);
+    });
+  }
+</script>
+
+</body>
+</html>

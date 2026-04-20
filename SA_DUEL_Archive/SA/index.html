@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사도 아카이브 — SA DUELS</title>
+<link rel="stylesheet" href="../sa.css">
+<style>
+  .apostle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .apostle-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .apostle-card:hover { border-color: var(--gold); }
+
+  .apostle-thumb-wrap {
+    position: relative;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    background: var(--bg3);
+  }
+  .apostle-thumb {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: top;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  .apostle-card:hover .apostle-thumb { transform: scale(1.03); }
+
+  .apostle-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 48px 14px 14px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+  }
+  .apostle-code { font-size: 10px; color: var(--gold); letter-spacing: 2px; margin-bottom: 2px; }
+  .apostle-name { font-size: 15px; font-weight: 700; color: #eeeef2; }
+
+  .apostle-meta {
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+  }
+  .apostle-world { font-size: 10px; color: var(--text-sub); letter-spacing: 1px; }
+  .apostle-record { font-size: 11px; font-weight: 700; display: flex; gap: 6px; }
+  .rec-w { color: #e57373; }
+  .rec-l { color: #5b9bd5; }
+
+  @media (max-width: 640px) {
+    .apostle-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo">SA DUELS</a>
+  <span class="site-divider">/</span>
+  <span class="site-breadcrumb">사도 아카이브</span>
+</header>
+
+<main class="page">
+  <div class="section-header">
+    <span class="section-title">SACRED AGENT DATABASE</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="section-count" id="count"></div>
+  <div class="apostle-grid" id="grid">
+    <div class="status-msg">로딩 중...</div>
+  </div>
+</main>
+
+<script src="../manifest.js"></script>
+<script>
+  const grid  = document.getElementById('grid');
+  const count = document.getElementById('count');
+  const list  = SA_MANIFEST.apostles;
+
+  count.textContent = `총 ${list.length}명 등록`;
+  grid.innerHTML = '';
+
+  if (!list.length) {
+    grid.innerHTML = '<div class="status-msg">등록된 사도가 없습니다.</div>';
+  } else {
+    list.forEach(a => {
+      const card = document.createElement('a');
+      card.className = 'apostle-card';
+      card.href = `viewer.html?code=${a.code}`;
+      card.innerHTML = `
+        <div class="apostle-thumb-wrap">
+          <img class="apostle-thumb" src="${a.folder}/${a.thumb}" alt="${a.name}" onerror="this.style.opacity=0">
+          <div class="apostle-overlay">
+            <div class="apostle-code">${a.code}</div>
+            <div class="apostle-name">${a.name}</div>
+          </div>
+        </div>
+        <div class="apostle-meta">
+          <span class="apostle-world">${a.world}</span>
+          <span class="apostle-record">
+            <span class="rec-w">${a.wins ?? 0}W</span>
+            <span class="rec-l">${a.losses ?? 0}L</span>
+          </span>
+        </div>`;
+      grid.appendChild(card);
+    });
+  }
+</script>
+
+</body>
+</html>

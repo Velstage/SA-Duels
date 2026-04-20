@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>배틀 아카이브 — SA DUELS</title>
+<link rel="stylesheet" href="../sa.css">
+<style>
+  /* 스크롤 없이 한 화면에 고정 */
+  body { height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
+
+  .battle-header {
+    border-bottom: 1px solid var(--border);
+    padding: 20px 40px;
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    flex-shrink: 0;
+  }
+  .battle-code-tag { font-size: 10px; color: var(--gold); letter-spacing: 3px; margin-bottom: 6px; }
+  .battle-title    { font-size: 24px; font-weight: 700; color: #eeeef2; letter-spacing: 1px; margin-bottom: 8px; }
+  .battle-meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .meta-chip {
+    font-size: 11px; padding: 3px 10px;
+    border-radius: 2px; border: 1px solid var(--border);
+    color: var(--text-sub); letter-spacing: 1px;
+  }
+
+  /* 페이지 전체가 남은 높이를 채움 */
+  .page {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 32px;
+    padding: 24px 40px;
+    flex: 1;
+    min-height: 0; /* flex 자식이 수축할 수 있도록 */
+    align-items: stretch;
+  }
+
+  /* 뷰어 컬럼 — 전체 높이를 flex로 분배 */
+  .viewer-col {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  /* 이미지 랩: aspect-ratio 제거, 남은 높이 전부 차지 */
+  .viewer-img-wrap {
+    position: relative;
+    flex: 1;
+    min-height: 300px; /* 최소 높이 설정 */
+    background: var(--bg3);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .viewer-img {
+    width: 100%; height: 100%;
+    object-fit: contain; /* 배틀 이미지에 맞게 */
+    display: block;
+  }
+
+  /* 사이드바 */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* 씬 네비게이션 */
+  .scene-nav {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+  }
+  .scene-nav button {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 8px 16px;
+    color: var(--text);
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .scene-nav button:hover { border-color: var(--gold); }
+  .scene-nav button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* 현재 씬 정보 */
+  .scene-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow-y: auto; /* 내용이 많을 때 스크롤 */
+  }
+  .scene-title { font-size: 18px; font-weight: 700; color: #eeeef2; }
+  .scene-desc  { font-size: 14px; color: var(--text); line-height: 1.6; }
+  .scene-note  { font-size: 12px; color: var(--text-sub); line-height: 1.5; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+
+  /* 결과 표시 */
+  .result-bar { width: 6px; background: var(--lose); }
+  .result-bar.win  { background: var(--win); }
+  .result-bar.draw { background: var(--text-sub); }
+
+  @media (max-width: 1000px) {
+    .page { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .viewer-img-wrap { min-height: 400px; } /* 모바일에서 높이 더 확보 */
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo">SA DUELS</a>
+  <span class="site-divider">/</span>
+  <a href="index.html" class="site-breadcrumb">배틀 아카이브</a>
+  <span class="site-divider">/</span>
+  <span class="site-breadcrumb" id="breadcrumb-name">로딩 중...</span>
+</header>
+
+<main class="page">
+  <div class="viewer-col">
+    <div class="viewer-img-wrap">
+      <img class="viewer-img" id="viewer-img" src="" alt="배틀 씬">
+    </div>
+  </div>
+  <div class="sidebar">
+    <div class="scene-nav">
+      <button id="prev-btn" onclick="changeScene(-1)">이전</button>
+      <button id="next-btn" onclick="changeScene(1)">다음</button>
+    </div>
+    <div class="scene-info" id="scene-info">
+      <!-- 현재 씬 정보가 여기에 삽입됨 -->
+    </div>
+  </div>
+</main>
+
+<script>
+  // URL 파라미터에서 code 가져오기
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get('code');
+  const folder = code ? 'B' + code.slice(1) : null; // B001 -> B001
+
+  if (!code || !folder) {
+    document.getElementById('scene-info').innerHTML = '<p>배틀 코드를 지정해주세요.</p>';
+  } else {
+    const script = document.createElement('script');
+    script.src = `${folder}/scenes.js`;
+    script.onload = () => {
+      console.log('Script loaded successfully');
+      renderBattle(BATTLE);
+    };
+    script.onerror = () => {
+      console.log('Script load failed');
+      document.getElementById('scene-info').innerHTML = '<p>데이터를 불러올 수 없습니다.</p>';
+    };
+    document.head.appendChild(script);
+  }
+
+  let currentSceneIndex = 0;
+
+  function renderBattle(data) {
+    document.title = `${data.code} — ${data.matchup} — SA DUELS`;
+    document.getElementById('breadcrumb-name').textContent = `${data.code} ${data.matchup}`;
+
+    // 헤더 추가
+    const headerHtml = `
+      <div class="battle-code-tag">${data.code}</div>
+      <h1 class="battle-title">${data.matchup}</h1>
+      <div class="battle-meta-row">
+        <span class="meta-chip">HOME: ${data.home_name || data.home}</span>
+        <span class="meta-chip">AWAY: ${data.away_name || data.away}</span>
+        <span class="meta-chip result-${data.home_result}">${data.home_result === 'win' ? '홈 승리' : data.home_result === 'lose' ? '홈 패배' : '무승부'}</span>
+      </div>
+    `;
+    const header = document.createElement('div');
+    header.className = 'battle-header';
+    header.innerHTML = headerHtml;
+    document.querySelector('header').insertAdjacentElement('afterend', header);
+
+    // 첫 씬 표시
+    if (data.scenes.length > 0) {
+      selectScene(0, data.scenes[0]);
+    }
+    updateNavButtons(data.scenes.length);
+  }
+
+  function selectScene(index, scene) {
+    currentSceneIndex = index;
+    // 이미지 변경
+    document.getElementById('viewer-img').src = `./${folder}/${scene.img}`;
+    // 씬 정보 업데이트
+    const info = document.getElementById('scene-info');
+    info.innerHTML = `
+      <div class="scene-title">${scene.title}</div>
+      <div class="scene-desc">${scene.desc.replace(/\n/g, '<br>')}</div>
+      <div class="scene-note">${scene.note.replace(/\n/g, '<br>')}</div>
+    `;
+    updateNavButtons(BATTLE.scenes.length);
+  }
+
+  function changeScene(direction) {
+    const newIndex = currentSceneIndex + direction;
+    if (newIndex >= 0 && newIndex < BATTLE.scenes.length) {
+      const scene = BATTLE.scenes[newIndex];
+      selectScene(newIndex, scene);
+    }
+  }
+
+  function updateNavButtons(totalScenes) {
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    prevBtn.disabled = currentSceneIndex <= 0;
+    nextBtn.disabled = currentSceneIndex >= totalScenes - 1;
+  }
+</script>
+
+</body>
+</html>

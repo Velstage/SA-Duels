@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사도 프로필 — SA DUELS</title>
+<link rel="stylesheet" href="../sa.css">
+<style>
+  .profile-section {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 48px;
+    margin-bottom: 64px;
+  }
+  .profile-img-wrap { position: relative; width: 300px; aspect-ratio: 2/3; align-self: start; }
+  .profile-img {
+    width: 100%; aspect-ratio: 2/3;
+    object-fit: cover; object-position: top;
+    border-radius: var(--radius);
+    display: block;
+    border: 1px solid var(--border);
+    background: var(--bg3);
+  }
+  .profile-img-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 32px 16px 14px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    border-radius: 0 0 var(--radius) var(--radius);
+    font-size: 11px; color: var(--text-sub); letter-spacing: 1px;
+  }
+
+  .profile-info { display: flex; flex-direction: column; gap: 0; }
+  .profile-code  { font-size: 12px; color: var(--gold); letter-spacing: 3px; margin-bottom: 6px; }
+  .profile-name  { font-size: 40px; font-weight: 700; color: #eeeef2; letter-spacing: 1px; line-height: 1.1; margin-bottom: 4px; }
+  .profile-name-en { font-size: 16px; color: var(--text-sub); letter-spacing: 4px; margin-bottom: 24px; }
+  .profile-world {
+    display: inline-block; width: fit-content;
+    background: var(--bg3); border: 1px solid var(--border);
+    color: var(--text-sub); font-size: 11px;
+    padding: 4px 12px; border-radius: 2px; letter-spacing: 1px; margin-bottom: 32px;
+  }
+
+  .stat-table { width: 100%; border-collapse: collapse; margin-bottom: 32px; }
+  .stat-table tr { border-bottom: 1px solid var(--border); }
+  .stat-table tr:last-child { border-bottom: none; }
+  .stat-table td { padding: 10px 0; vertical-align: top; }
+  .stat-label { color: var(--text-sub); font-size: 11px; letter-spacing: 1px; width: 80px; padding-right: 16px; }
+  .stat-value { color: var(--text); font-size: 13px; }
+
+  .trait-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .trait-box {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px 16px;
+  }
+  .trait-box.strength { border-left: 3px solid #e57373; }
+  .trait-box.weakness { border-left: 3px solid #5b8dd9; }
+  .trait-title { font-size: 10px; letter-spacing: 2px; margin-bottom: 6px; }
+  .trait-box.strength .trait-title { color: #e57373; }
+  .trait-box.weakness .trait-title { color: #5b8dd9; }
+  .trait-body { font-size: 12px; color: var(--text); line-height: 1.6; }
+
+  .profile-desc {
+    font-size: 13px; color: var(--text); line-height: 1.8;
+    border-top: 1px solid var(--border); padding-top: 24px;
+  }
+
+  .setting-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 64px; }
+  .setting-box {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px;
+  }
+  .setting-tag { font-size: 10px; letter-spacing: 2px; color: var(--text-sub); margin-bottom: 8px; }
+  .setting-body { font-size: 13px; color: var(--text); line-height: 1.7; }
+
+  .records-grid { display: flex; flex-direction: column; gap: 2px; }
+  .record-cell {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden;
+    display: grid; grid-template-columns: 6px 140px 1fr 140px;
+    align-items: stretch;
+  }
+  .record-thumb, .record-highlight {
+    width: 140px; aspect-ratio: 2/3;
+    object-fit: cover; object-position: top;
+    display: block; background: var(--bg3);
+  }
+  .record-thumb     { border-right: 1px solid var(--border); }
+  .record-highlight { border-left:  1px solid var(--border); }
+  .record-info { padding: 20px 24px; display: flex; flex-direction: column; gap: 8px; }
+  .record-code    { font-size: 10px; color: var(--text-sub); letter-spacing: 2px; }
+  .record-matchup { font-size: 15px; font-weight: 700; color: #eeeef2; }
+  .record-summary { font-size: 12px; color: var(--text-sub); line-height: 1.7; margin-top: 2px; }
+  .badge { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 2px; letter-spacing: 1px; }
+  .badge.win  { background: var(--win);  color: white; }
+  .badge.lose { background: var(--lose); color: white; }
+  .badge.draw { background: var(--text-sub); color: var(--text); }
+  .result-bar { width: 6px; background: var(--lose); }
+  .result-bar.win  { background: var(--win); }
+  .result-bar.draw { background: var(--text-sub); }
+
+  @media (max-width: 800px) {
+    .profile-section { grid-template-columns: 1fr; }
+    .profile-img-wrap { max-width: 280px; }
+    .setting-grid { grid-template-columns: 1fr; }
+    .record-cell { grid-template-columns: 6px 100px 1fr 100px; }
+    .record-thumb, .record-highlight { width: 100px; }
+    .trait-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo">SA DUELS</a>
+  <span class="site-divider">/</span>
+  <a href="index.html" class="site-breadcrumb">사도 아카이브</a>
+  <span class="site-divider">/</span>
+  <span class="site-breadcrumb" id="breadcrumb-name">로딩 중...</span>
+</header>
+
+<main class="page" id="main-content">
+  <!-- 동적 콘텐츠가 여기에 삽입됨 -->
+</main>
+
+<script>
+  // URL 파라미터에서 code 가져오기
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get('code');
+  const folder = code ? code.replace('SA_', 'S') : null;
+
+  if (!code || !folder) {
+    document.getElementById('main-content').innerHTML = '<p>사도 코드를 지정해주세요.</p>';
+  } else {
+    const script = document.createElement('script');
+    script.src = `${folder}/data.js`;
+    script.onload = () => {
+      renderProfile(SA_DATA);
+    };
+    script.onerror = () => {
+      document.getElementById('main-content').innerHTML = '<p>데이터를 불러올 수 없습니다.</p>';
+    };
+    document.head.appendChild(script);
+  }
+
+  function renderProfile(data) {
+    document.title = `${data.code} ${data.name} — SA DUELS`;
+    document.getElementById('breadcrumb-name').textContent = `${data.code} ${data.name}`;
+
+    const html = `
+      <section class="profile-section">
+        <div class="profile-img-wrap">
+          <img class="profile-img" src="${folder}/${data.profile_img}" alt="${data.name} 프로필">
+          <div class="profile-img-label">${data.code} · ${data.name_en}</div>
+        </div>
+        <div class="profile-info">
+          <div class="profile-code">${data.code}</div>
+          <h1 class="profile-name">${data.name}</h1>
+          <div class="profile-name-en">${data.name_en}</div>
+          <div class="profile-world">◈ ${data.world}</div>
+
+          <table class="stat-table">
+            <tr><td class="stat-label">무기</td><td class="stat-value">${data.stats.weapon}</td></tr>
+            <tr><td class="stat-label">능력</td><td class="stat-value">${data.stats.ability}</td></tr>
+            <tr><td class="stat-label">전략</td><td class="stat-value">${data.stats.strategy}</td></tr>
+            <tr><td class="stat-label">소속</td><td class="stat-value">${data.stats.affiliation}</td></tr>
+          </table>
+
+          <div class="trait-grid">
+            <div class="trait-box strength">
+              <div class="trait-title">${data.traits.strength.title}</div>
+              <div class="trait-body">${data.traits.strength.body}</div>
+            </div>
+            <div class="trait-box weakness">
+              <div class="trait-title">${data.traits.weakness.title}</div>
+              <div class="trait-body">${data.traits.weakness.body}</div>
+            </div>
+          </div>
+
+          <div class="profile-desc">${data.description}</div>
+        </div>
+      </section>
+
+      <div class="section-header">
+        <span class="section-title">HOME · AWAY</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="setting-grid" style="margin-bottom:64px">
+        <div class="setting-box">
+          <div class="setting-tag">${data.settings.home.tag}</div>
+          <div class="setting-body">${data.settings.home.body}</div>
+        </div>
+        <div class="setting-box">
+          <div class="setting-tag">${data.settings.away.tag}</div>
+          <div class="setting-body">${data.settings.away.body}</div>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <span class="section-title">BATTLE RECORDS</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="records-grid">
+        ${data.records.length > 0 ? data.records.map(record => `
+          <div class="record-cell">
+            <div class="result-bar ${record.result}"></div>
+            <img class="record-thumb" src="${record.thumb}" alt="${record.code} 썸네일">
+            <div class="record-info">
+              <div class="record-code">${record.code} · ${record.position}</div>
+              <div class="record-matchup">${record.matchup}</div>
+              <span class="badge ${record.result}">${record.result === 'win' ? '승리' : record.result === 'lose' ? '패배' : '무승부'}</span>
+              <div class="record-summary">${record.summary}</div>
+            </div>
+            <img class="record-highlight" src="${record.highlight}" alt="${record.code} 하이라이트">
+          </div>
+        `).join('') : '<div class="records-empty">전투 기록이 없습니다.</div>'}
+      </div>
+    `;
+    document.getElementById('main-content').innerHTML = html;
+  }
+</script>
+
+</body>
+</html>
