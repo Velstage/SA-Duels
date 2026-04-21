@@ -44,15 +44,6 @@ const SA_DATA = {
       summary: "어김없이 정면으로 달려든 빅토리아. 릴리스의 가드를 파괴하고 치명적인 피해를 가하는가 싶었으나, 모든 것은 환각이었다. 릴리스의 킥이 그녀의 안면을 강타하며 승부가 결정되었다.",
       thumb: "../../Archives/B001/src/thumb.png",
       highlight: "../../Archives/B001/src/highlight.png"
-    },
-    {
-      code: "B002",
-      position: "HOME",
-      matchup: "빅토리아 vs 다이애나",
-      result: "win",
-      summary: "다이애나의 화살이 역장을 흔들었지만, 빅토리아의 돌진은 멈추지 않았다. 최종 돌진으로 다이애나를 제압.",
-      thumb: "../../Archives/B002/src/thumb.png",
-      highlight: "../../Archives/B002/src/highlight.png"
     }
   ]
 };

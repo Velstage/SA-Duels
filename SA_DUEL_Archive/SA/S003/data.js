@@ -32,8 +32,18 @@ const SA_DATA = {
     },
     away: {
       tag: "✈ 어웨이 설정",
-      body: "판타지나 과학 세계에서는 모험가나 용병으로 등장. 상대의 약점을 파고드는 잔꾀꾼으로 활약. 강자 사냥꾼 이미지."
+      body: "어떤 세계에서든 도둑으로 등장. 산적, 해적, 괴도 등. 상황에 따라서는 검조차 들지 않을 정도로 도둑의 정체성이 큼."
     }
   },
-  records: []
+  records: [
+    {
+      code: "B002",
+      position: "AWAY",
+      matchup: "다이애나 vs 캐서린",
+      result: "win",
+      summary: "대통령 집무실 침입 중 다이애나와 조우. 정면 전투를 포기하고 하수도로 유인해 수중전으로 전환. 천장을 뚫고 앞길을 막는 연출로 퇴로를 차단한 뒤, 초크로 다이애나를 실신시켜 승리. 황금 도장 외 에메랄드 목걸이까지 챙김.",
+      thumb: "../../Archives/B002/src/thumb.png",
+      highlight: "../../Archives/B002/src/highlight.png"
+    }
+  ]
 };

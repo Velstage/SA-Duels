@@ -203,14 +203,14 @@
         ${data.records.length > 0 ? data.records.map(record => `
           <div class="record-cell">
             <div class="result-bar ${record.result}"></div>
-            <img class="record-thumb" src="${record.thumb}" alt="${record.code} 썸네일">
+            <img class="record-thumb" src="${folder}/${record.thumb}" alt="${record.code} 썸네일">
             <div class="record-info">
               <div class="record-code">${record.code} · ${record.position}</div>
               <div class="record-matchup">${record.matchup}</div>
               <span class="badge ${record.result}">${record.result === 'win' ? '승리' : record.result === 'lose' ? '패배' : '무승부'}</span>
               <div class="record-summary">${record.summary}</div>
             </div>
-            <img class="record-highlight" src="${record.highlight}" alt="${record.code} 하이라이트">
+            <img class="record-highlight" src="${folder}/${record.highlight}" alt="${record.code} 하이라이트">
           </div>
         `).join('') : '<div class="records-empty">전투 기록이 없습니다.</div>'}
       </div>

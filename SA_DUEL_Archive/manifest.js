@@ -36,7 +36,7 @@ const SA_MANIFEST = {
       world:   "대양의 세계",
       folder:  "S003",
       thumb:   "src/profile.png",
-      wins:    0,
+      wins:    1,
       losses:  0
     },
     {
@@ -75,42 +75,15 @@ const SA_MANIFEST = {
     },
     {
       code:        "B002",
-      matchup:     "빅토리아 vs 다이애나",
-      home:        "SA_001",
-      home_name:   "빅토리아",
-      away:        "SA_002",
-      away_name:   "다이애나",
-      home_result: "win",  // 빅토리아 승리 가정
-      folder:      "B002",
-      thumb:       "src/thumb.png"
-    }
-  ],
-
-  battles: [
-    {
-      code:        "B001",
-      matchup:     "빅토리아 vs 릴리스",
-      home:        "SA_001",
-      home_name:   "빅토리아",
-      away:        "SA_004",
-      away_name:   "릴리스",
+      matchup:     "다이애나 vs 캐서린",
+      home:        "SA_002",
+      home_name:   "다이애나",
+      away:        "SA_003",
+      away_name:   "캐서린",
       home_result: "lose",
-      folder:      "B001",        // → Archives/B001/index.html
-      thumb:       "src/thumb.png"
-    }
-    /* 추가 예시
-    ,{
-      code:        "B002",
-      matchup:     "빅토리아 vs ???",
-      home:        "SA_001",
-      home_name:   "빅토리아",
-      away:        "SA_???",
-      away_name:   "???",
-      home_result: "win",
       folder:      "B002",
       thumb:       "src/thumb.png"
     }
-    */
   ]
 
 };

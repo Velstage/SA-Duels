@@ -38,10 +38,10 @@ const SA_DATA = {
   records: [
     {
       code: "B002",
-      position: "AWAY",
-      matchup: "빅토리아 vs 다이애나",
+      position: "HOME",
+      matchup: "다이애나 vs 캐서린",
       result: "lose",
-      summary: "빅토리아의 역장 돌진을 화살로 저지하려 했으나, 역장이 너무 강력했다. 최종 돌진으로 패배.",
+      summary: "대통령 집무실에 침입한 괴도 캐서린을 추적했으나 하수도로 유인당해 수중전에 빠짐. 물 속에서 캐서린의 초크에 의식을 잃고 패배. 에메랄드 목걸이까지 약탈당함.",
       thumb: "../../Archives/B002/src/thumb.png",
       highlight: "../../Archives/B002/src/highlight.png"
     }
