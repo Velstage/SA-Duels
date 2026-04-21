@@ -10,9 +10,17 @@ const BATTLE = {
   matchup:     "빅토리아 vs 릴리스",
   home:        "SA_001",
   home_name:   "빅토리아",
+  home_world:  "과학의 세계",
   away:        "SA_004",
   away_name:   "릴리스",
+  away_world:  "어둠의 세계",
   home_result: "lose",   /* "win" / "lose" / "draw" */
+
+  /* 인트로 화면 설정 */
+  setting: {
+    location: "센트럴 시티 — 교회 폐허",
+    story:    "홈 측 빅토리아의 관할 구역인 센트럴 시티 외곽. 폐기된 교회를 거점으로 삼은 무장 세력의 소탕 임무 중, 빅토리아는 이미 그 자리에서 단독으로 활동하고 있던 릴리스와 마주쳤다.\n협회 규정에 따라 듀얼이 즉각 선포되었다.\n양측 모두 전장을 이미 자신이 장악하고 있다고 판단하고 있었다."
+  },
 
   /* 씬 목록 — 순서대로 표시됨 */
   scenes: [

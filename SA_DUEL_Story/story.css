@@ -1,0 +1,361 @@
+/* ============================================================
+   SA DUELS STORY — story.css  (Cytus 2 aesthetic)
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #07070d;
+  --bg2:       #0d0d18;
+  --bg3:       #131320;
+  --border:    #1a1a2c;
+  --border2:   #222238;
+  --text:      #dcdcf0;
+  --text-sub:  #5a5a90;
+  --text-dim:  #2c2c48;
+  --cyan:      #56b8d8;
+  --cyan-dim:  #0e2a38;
+  --gold:      #b89848;
+  --win:       #b84040;
+  --lose:      #3878b8;
+  --draw:      #b89848;
+  --radius:    4px;
+  --font:      'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── 헤더 ── */
+.story-header {
+  background: #040408;
+  border-bottom: 1px solid var(--border);
+  padding: 14px 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.story-logo {
+  color: var(--cyan);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.story-logo:hover { opacity: 0.75; }
+.story-divider {
+  color: var(--border2);
+  font-size: 14px;
+  line-height: 1;
+}
+.story-breadcrumb {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--text-sub);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.story-breadcrumb:hover { color: var(--cyan); }
+.story-current {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--text-sub);
+}
+
+/* ── 페이지 컨테이너 ── */
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 48px 40px;
+}
+
+/* ── 섹션 헤더 ── */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.section-title {
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: var(--cyan);
+  white-space: nowrap;
+  opacity: 0.7;
+}
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── 배틀 목록 (Cytus 2 song-list style) ── */
+.battle-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.battle-entry {
+  display: flex;
+  align-items: stretch;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.18s, border-color 0.18s;
+  position: relative;
+}
+.battle-entry:hover {
+  background: var(--bg3);
+  border-color: var(--border2);
+}
+.battle-entry:hover .battle-arrow { opacity: 1; transform: translateX(0); }
+.battle-entry.locked {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.battle-thumb {
+  width: 100px;
+  height: 74px;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+  filter: brightness(0.75) saturate(0.8);
+}
+.battle-thumb-placeholder {
+  width: 100px;
+  height: 74px;
+  flex-shrink: 0;
+  background: var(--bg3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  border-right: 1px solid var(--border);
+}
+
+.battle-result-bar {
+  width: 3px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+.battle-result-bar.win  { background: var(--win); }
+.battle-result-bar.lose { background: var(--lose); }
+.battle-result-bar.draw { background: var(--draw); }
+.battle-result-bar.none { background: var(--border2); }
+
+.battle-info {
+  flex: 1;
+  padding: 14px 18px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+}
+.battle-code {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--cyan);
+  opacity: 0.6;
+}
+.battle-matchup {
+  font-size: 15px;
+  font-weight: 700;
+  color: #e4e4f4;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.battle-meta-text {
+  font-size: 11px;
+  color: var(--text-sub);
+}
+
+.battle-right {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.battle-count {
+  font-size: 11px;
+  color: var(--text-sub);
+  letter-spacing: 0.5px;
+}
+.battle-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+.battle-badge.win  {
+  background: rgba(184,64,64,0.18);
+  color: #d88888;
+  border: 1px solid rgba(184,64,64,0.28);
+}
+.battle-badge.lose {
+  background: rgba(56,120,184,0.18);
+  color: #7aaad8;
+  border: 1px solid rgba(56,120,184,0.28);
+}
+.battle-badge.draw {
+  background: rgba(184,152,72,0.15);
+  color: var(--gold);
+  border: 1px solid rgba(184,152,72,0.25);
+}
+.battle-lock {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.battle-arrow {
+  font-size: 14px;
+  color: var(--text-sub);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.18s, transform 0.18s;
+}
+
+/* ── 포스트 목록 (battle story index) ── */
+.post-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-entry {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 4px;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  transition: padding-left 0.15s;
+}
+.post-entry:last-child { border-bottom: none; }
+.post-entry:hover { padding-left: 8px; }
+
+.post-num {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  min-width: 28px;
+  text-align: center;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+.post-main { flex: 1; min-width: 0; }
+.post-category {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--cyan);
+  opacity: 0.65;
+  margin-bottom: 4px;
+}
+.post-title {
+  font-size: 14px;
+  color: #dcdcf0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 3px;
+}
+.post-entry:hover .post-title { color: #fff; }
+.post-author {
+  font-size: 11px;
+  color: var(--text-sub);
+}
+.post-right {
+  text-align: right;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.post-views,
+.post-comments {
+  font-size: 11px;
+  color: var(--text-sub);
+}
+
+/* ── 배틀 상세 헤더 (B001/index.html 용) ── */
+.battle-detail-header {
+  padding: 36px 0 40px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 40px;
+}
+.battle-detail-code {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--cyan);
+  opacity: 0.65;
+  margin-bottom: 10px;
+}
+.battle-detail-matchup {
+  font-size: clamp(22px, 4vw, 34px);
+  font-weight: 900;
+  color: #eaeaf8;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+  line-height: 1.1;
+}
+.battle-detail-meta {
+  font-size: 12px;
+  color: var(--text-sub);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+.battle-detail-meta .dot { color: var(--border2); }
+.battle-detail-meta .result-lose { color: #7aaad8; }
+.battle-detail-meta .result-win  { color: #d88888; }
+
+/* ── 뒤로가기 ── */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--text-sub);
+  text-decoration: none;
+  margin-bottom: 36px;
+  transition: color 0.18s;
+}
+.back-link:hover { color: var(--cyan); }
+
+/* ── 푸터 ── */
+.story-footer {
+  border-top: 1px solid var(--border);
+  padding: 20px 40px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+/* ── 반응형 ── */
+@media (max-width: 640px) {
+  .story-header { padding: 12px 20px; }
+  .page { padding: 32px 20px; }
+  .battle-thumb, .battle-thumb-placeholder { width: 76px; height: 60px; }
+}
