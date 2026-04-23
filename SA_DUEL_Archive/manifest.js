@@ -16,7 +16,7 @@ const SA_MANIFEST = {
       world:   "과학의 세계",
       folder:  "S001",
       thumb:   "src/profile.png",
-      wins:    1,
+      wins:    0,
       losses:  1
     },
     {
