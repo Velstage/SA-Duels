@@ -10,7 +10,7 @@ const BATTLE = {
   matchup:     "빅토리아 vs 릴리스",
   home:        "SA_001",
   home_name:   "빅토리아",
-  home_world:  "과학의 세계",
+  home_world:  "마천루의 세계",
   away:        "SA_004",
   away_name:   "릴리스",
   away_world:  "어둠의 세계",

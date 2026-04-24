@@ -13,7 +13,7 @@ const SA_MANIFEST = {
       code:    "SA_001",
       name:    "빅토리아",
       name_en: "VICTORIA",
-      world:   "과학의 세계",
+      world:   "마천루의 세계",
       folder:  "S001",
       thumb:   "src/profile.png",
       wins:    0,
@@ -55,6 +55,36 @@ const SA_MANIFEST = {
       name_en: "ISOLDE",
       world:   "전설의 세계",
       folder:  "S005",
+      thumb:   "src/profile.png",
+      wins:    0,
+      losses:  0
+    },
+    {
+      code:    "SA_006",
+      name:    "카산드라",
+      name_en: "CASSANDRA",
+      world:   "마의 세계",
+      folder:  "S006",
+      thumb:   "src/profile.png",
+      wins:    0,
+      losses:  0
+    },
+        {
+      code:    "SA_007",
+      name:    "나리",
+      name_en: "NARI",
+      world:   "아침의 세계",
+      folder:  "S007",
+      thumb:   "src/profile.png",
+      wins:    0,
+      losses:  0
+    },
+    {
+      code:    "SA_008",
+      name:    "힐다",
+      name_en: "HILDA",
+      world:   "끝의 세계",
+      folder:  "S008",
       thumb:   "src/profile.png",
       wins:    0,
       losses:  0
