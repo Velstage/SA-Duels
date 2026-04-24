@@ -36,5 +36,14 @@ const SA_DATA = {
     }
   },
   records: [
+    {
+      code: "B003",
+      position: "AWAY",
+      matchup: "캐서린 vs 나리",
+      result: "win",
+      summary: "블루하트 항만 언덕에서 캐서린과 야간 조우. 캐서린의 페인트와 속임수를 모방으로 전부 무력화하며 장기전을 주도. 마지막 도박성 기습까지 차단하고 완파. 피가 튄 것을 투덜대며 현장 이탈.",
+      thumb: "../../Archives/B003/src/thumb.png",
+      highlight: "../../Archives/B003/src/highlight.png"
+    }
   ]
 };

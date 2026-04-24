@@ -37,7 +37,7 @@ const SA_MANIFEST = {
       folder:  "S003",
       thumb:   "src/profile.png",
       wins:    1,
-      losses:  0
+      losses:  1
     },
     {
       code:    "SA_004",
@@ -69,14 +69,14 @@ const SA_MANIFEST = {
       wins:    0,
       losses:  0
     },
-        {
+    {
       code:    "SA_007",
       name:    "나리",
       name_en: "NARI",
       world:   "아침의 세계",
       folder:  "S007",
       thumb:   "src/profile.png",
-      wins:    0,
+      wins:    1,
       losses:  0
     },
     {
@@ -112,6 +112,17 @@ const SA_MANIFEST = {
       away_name:   "캐서린",
       home_result: "lose",
       folder:      "B002",
+      thumb:       "src/thumb.png"
+    },
+    {
+      code:        "B003",
+      matchup:     "캐서린 vs 나리",
+      home:        "SA_003",
+      home_name:   "캐서린",
+      away:        "SA_007",
+      away_name:   "나리",
+      home_result: "lose",
+      folder:      "B003",
       thumb:       "src/thumb.png"
     }
   ]

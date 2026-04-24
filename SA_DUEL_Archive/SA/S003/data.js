@@ -44,6 +44,15 @@ const SA_DATA = {
       summary: "대통령 집무실 침입 중 다이애나와 조우. 정면 전투를 포기하고 하수도로 유인해 수중전으로 전환. 천장을 뚫고 앞길을 막는 연출로 퇴로를 차단한 뒤, 초크로 다이애나를 실신시켜 승리. 황금 도장 외 에메랄드 목걸이까지 챙김.",
       thumb: "../../Archives/B002/src/thumb.png",
       highlight: "../../Archives/B002/src/highlight.png"
+    },
+    {
+      code: "B003",
+      position: "HOME",
+      matchup: "캐서린 vs 나리",
+      result: "lose",
+      summary: "블루하트 항만 언덕에서 자객 나리와 야간 조우. 잔꾀와 페인트를 구사했으나 나리의 모방 능력에 전부 읽혀 패턴이 고갈됐다. 마지막 도박성 기습마저 차단당하며 완패.",
+      thumb: "../../Archives/B003/src/thumb.png",
+      highlight: "../../Archives/B003/src/highlight.png"
     }
   ]
 };
