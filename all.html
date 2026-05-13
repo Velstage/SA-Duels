@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>전체 — SA_duel</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/gallery.css">
+  <style>
+    .filter-bar {
+      padding: 20px 32px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .filter-label { font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.1em; }
+
+    .tag-pool { display: flex; flex-wrap: wrap; gap: 6px; min-height: 28px; }
+
+    .tag-btn {
+      padding: 3px 12px;
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      font-size: 0.75rem;
+      color: var(--text-sub);
+      cursor: pointer;
+      background: none;
+      transition: all 0.15s;
+    }
+
+    .tag-btn:hover { border-color: var(--accent); color: var(--text); }
+
+    .tag-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+
+    .result-bar {
+      padding: 12px 32px 0;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <a href="index.html" class="nav-link">← 목록</a>
+    <span class="page-title">전체</span>
+    <span></span>
+  </header>
+  <div class="filter-bar">
+    <div class="filter-label">TAGS</div>
+    <div id="tag-pool" class="tag-pool"></div>
+  </div>
+  <div id="result-bar" class="result-bar"></div>
+  <div id="gallery" class="gallery-grid"></div>
+  <script type="module" src="js/all.js"></script>
+</body>
+</html>
