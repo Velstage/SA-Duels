@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Seed</title>
+</head>
+<body>
+  <button id="btn">시딩 실행</button>
+  <pre id="log"></pre>
+  <script type="module">
+    import { db } from "./js/firebase.js";
+    import { doc, setDoc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+    const characters = {
+      diana: {
+        name: "다이애나", nameEn: "Diana",
+        origin: "SA — ShadeWatch",
+        style: "총기류 & 격투술 / 밀리터리 근접전",
+        flavor: ["ShadeWatch의 엘리트 요원.", "Operator의 가장 믿을 수 있는 아군."],
+        thumbnailUrl: "", order: 0
+      },
+      victoria: {
+        name: "빅토리아", nameEn: "Victoria",
+        origin: "SA — Overcharge",
+        style: "격투술 & 역장 / 초능력 근접 압박형",
+        flavor: ["Stella의 보안팀장. 서류도, 회의도, 전투도 — 모든 것이 완벽하다.", "실패는 용납하지 않는다."],
+        thumbnailUrl: "", order: 1
+      },
+      cassandra: {
+        name: "카산드라", nameEn: "Cassandra",
+        origin: "SA — Kingdom's Edge",
+        style: "마법진 & 격투술 / 함정 기반 트릭키 공세형",
+        flavor: ["공략의 여제라 불리는 수수께끼의 모험가.", "그 정체는 몰락한 솔레미 왕국의 왕녀."],
+        thumbnailUrl: "", order: 2
+      },
+      hilda: {
+        name: "힐다", nameEn: "Hilda",
+        origin: "SA — Last Colony",
+        style: "활 & 격투술 / 원거리-근접 혼합형",
+        flavor: ["끝난 세계에서 살아남은 자.", "크룬 제2 콜로니가 그녀를 만들었다."],
+        thumbnailUrl: "", order: 3
+      }
+    };
+
+    const log = document.getElementById("log");
+    document.getElementById("btn").addEventListener("click", async () => {
+      log.textContent = "시딩 시작...\n";
+      for (const [id, data] of Object.entries(characters)) {
+        await setDoc(doc(db, "characters", id), data);
+        log.textContent += `✓ ${id}\n`;
+      }
+      log.textContent += "완료. 이 페이지는 닫아도 됩니다.";
+    });
+  </script>
+</body>
+</html>
