@@ -1,0 +1,97 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0d0d10;
+  --bg2:       #141418;
+  --bg3:       #1c1c22;
+  --border:    #28282f;
+  --text:      #d0d0d8;
+  --text-sub:  #60606a;
+  --text-dim:  #38383f;
+  --accent:    #8888c0;
+  --accent-dim:#252540;
+  --radius:    8px;
+  --font:      'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', sans-serif;
+}
+
+body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; }
+
+a { color: inherit; text-decoration: none; }
+
+.page-header {
+  padding: 24px 32px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-title { font-size: 1.2rem; letter-spacing: 0.1em; color: var(--accent); }
+
+.nav-link {
+  font-size: 0.82rem;
+  color: var(--text-sub);
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: color 0.2s, border-color 0.2s;
+  cursor: pointer;
+  background: none;
+}
+
+.nav-link:hover { color: var(--text); border-color: var(--accent); }
+
+.btn-primary {
+  font-size: 0.82rem;
+  color: var(--accent);
+  padding: 6px 14px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover { background: var(--accent-dim); }
+
+/* 모달 */
+.modal-backdrop {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-backdrop.open { display: flex; }
+
+.modal {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  width: 420px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-title { font-size: 1rem; color: var(--text); }
+
+.modal input[type="text"],
+.modal input[type="file"] {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.85rem;
+}
+
+.modal input[type="text"]::placeholder { color: var(--text-dim); }
+
+.modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
