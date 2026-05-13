@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SA_duel</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/gallery.css">
+  <style>
+    .profile {
+      padding: 36px 32px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+    }
+
+    .profile-thumb {
+      width: 130px;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: var(--radius);
+      background: var(--bg2);
+      flex-shrink: 0;
+    }
+
+    .profile-info { display: flex; flex-direction: column; gap: 8px; }
+
+    .profile-name { font-size: 1.5rem; }
+
+    .profile-origin { font-size: 0.82rem; color: var(--accent); }
+
+    .profile-style { font-size: 0.78rem; color: var(--text-sub); }
+
+    .profile-flavor { font-size: 0.88rem; color: var(--text-sub); line-height: 1.9; margin-top: 6px; }
+
+    .skin-section { padding: 28px 32px; }
+
+    .skin-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .section-label { font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.12em; }
+
+    .skin-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+
+    .skin-tab {
+      padding: 5px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      cursor: pointer;
+      background: none;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .skin-tab.active,
+    .skin-tab:hover { color: var(--accent); border-color: var(--accent); }
+
+    .gallery-header {
+      display: flex;
+      justify-content: flex-end;
+      padding: 0 32px 12px;
+    }
+
+    .empty-state { padding: 20px 0; color: var(--text-dim); font-size: 0.82rem; }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <a href="index.html" class="nav-link">← 목록</a>
+    <span id="page-title" class="page-title"></span>
+    <a href="all.html" class="nav-link">전체 보기</a>
+  </header>
+
+  <section class="profile">
+    <img id="profile-thumb" class="profile-thumb" src="" alt="">
+    <div class="profile-info">
+      <div id="profile-name" class="profile-name"></div>
+      <div id="profile-origin" class="profile-origin"></div>
+      <div id="profile-style" class="profile-style"></div>
+      <div id="profile-flavor" class="profile-flavor"></div>
+    </div>
+  </section>
+
+  <section class="skin-section">
+    <div class="skin-header">
+      <div class="section-label">SKINS</div>
+      <button id="btn-add-skin" class="btn-primary">+ 스킨 추가</button>
+    </div>
+    <div id="skin-tabs" class="skin-tabs"></div>
+  </section>
+
+  <div class="gallery-header">
+    <button id="btn-add-image" class="btn-primary" style="display:none">+ 이미지 추가</button>
+  </div>
+  <div id="gallery" class="gallery-grid"></div>
+
+  <!-- 스킨 추가 모달 -->
+  <div id="modal-skin" class="modal-backdrop">
+    <div class="modal">
+      <div class="modal-title">스킨 추가</div>
+      <input id="skin-name" type="text" placeholder="스킨 이름 (예: 기본)">
+      <input id="skin-theme" type="text" placeholder="테마 (예: 기본, 평상복)">
+      <div class="modal-actions">
+        <button class="nav-link" id="cancel-skin">취소</button>
+        <button class="btn-primary" id="confirm-skin">추가</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 이미지 추가 모달 -->
+  <div id="modal-image" class="modal-backdrop">
+    <div class="modal">
+      <div class="modal-title">이미지 추가</div>
+      <input id="image-file" type="file" accept="image/*">
+      <input id="image-tags" type="text" placeholder="태그 (쉼표로 구분, 예: 패배, 기본)">
+      <div class="modal-actions">
+        <button class="nav-link" id="cancel-image">취소</button>
+        <button class="btn-primary" id="confirm-image">업로드</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/character.js"></script>
+</body>
+</html>
