@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사도 프로필 — SA DUELS</title>
+<link rel="stylesheet" href="../sa.css">
+<style>
+  .profile-section {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 48px;
+    margin-bottom: 64px;
+  }
+  .profile-img-wrap { position: relative; width: 280px; aspect-ratio: 2/3; align-self: start; }
+  .profile-img {
+    width: 100%; aspect-ratio: 2/3;
+    object-fit: cover; object-position: top;
+    border-radius: var(--radius); display: block;
+    border: 1px solid var(--border); background: var(--bg3);
+  }
+  .profile-img-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 32px 16px 14px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    border-radius: 0 0 var(--radius) var(--radius);
+    font-size: 11px; color: var(--text-sub); letter-spacing: 1px;
+  }
+  .profile-info { display: flex; flex-direction: column; }
+  .profile-code    { font-size: 12px; color: var(--gold); letter-spacing: 3px; margin-bottom: 6px; }
+  .profile-name    { font-size: 40px; font-weight: 700; color: #eeeef2; letter-spacing: 1px; line-height: 1.1; margin-bottom: 4px; }
+  .profile-name-en { font-size: 16px; color: var(--text-sub); letter-spacing: 4px; margin-bottom: 24px; }
+  .profile-world {
+    display: inline-block; width: fit-content;
+    background: var(--bg3); border: 1px solid var(--border);
+    color: var(--text-sub); font-size: 11px;
+    padding: 4px 12px; border-radius: 2px; letter-spacing: 1px; margin-bottom: 32px;
+  }
+  .stat-table { width: 100%; border-collapse: collapse; margin-bottom: 32px; }
+  .stat-table tr { border-bottom: 1px solid var(--border); }
+  .stat-table tr:last-child { border-bottom: none; }
+  .stat-table td { padding: 10px 0; vertical-align: top; }
+  .stat-label { color: var(--text-sub); font-size: 11px; letter-spacing: 1px; width: 80px; padding-right: 16px; }
+  .stat-value { color: var(--text); font-size: 13px; }
+  .trait-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .trait-box { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+  .trait-box.strength { border-left: 3px solid #e57373; }
+  .trait-box.weakness { border-left: 3px solid #5b8dd9; }
+  .trait-title { font-size: 10px; letter-spacing: 2px; margin-bottom: 6px; }
+  .trait-box.strength .trait-title { color: #e57373; }
+  .trait-box.weakness .trait-title { color: #5b8dd9; }
+  .trait-body { font-size: 12px; color: var(--text); line-height: 1.6; }
+  .profile-desc {
+    font-size: 13px; color: var(--text); line-height: 1.8;
+    border-top: 1px solid var(--border); padding-top: 24px;
+  }
+  .setting-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 64px; }
+  .setting-box { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+  .setting-tag  { font-size: 10px; letter-spacing: 2px; color: var(--text-sub); margin-bottom: 8px; }
+  .setting-body { font-size: 13px; color: var(--text); line-height: 1.7; }
+
+  /* 갤러리 */
+  .defeat-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 6px;
+  }
+  .defeat-photo {
+    display: block; aspect-ratio: 3/4; overflow: hidden;
+    background: var(--bg3); border-radius: var(--radius);
+    cursor: pointer; border: none; padding: 0;
+    position: relative;
+  }
+  .defeat-photo img {
+    width: 100%; height: 100%; object-fit: cover; object-position: top;
+    display: block; transition: transform 0.35s ease;
+  }
+  .defeat-photo:hover img { transform: scale(1.05); }
+  .defeat-photo-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0); transition: background 0.25s;
+    display: flex; align-items: flex-end; padding: 12px;
+  }
+  .defeat-photo:hover .defeat-photo-overlay { background: rgba(0,0,0,0.35); }
+  .defeat-photo-label {
+    font-size: 11px; color: rgba(255,255,255,0);
+    letter-spacing: 1px; transition: color 0.25s;
+  }
+  .defeat-photo:hover .defeat-photo-label { color: rgba(255,255,255,0.7); }
+
+  .defeat-empty {
+    padding: 48px 0; text-align: center;
+    color: var(--text-dim); font-size: 12px; letter-spacing: 1px;
+    border: 1px solid var(--border); border-radius: var(--radius);
+  }
+
+  /* 모달 */
+  .modal-backdrop {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.88);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    opacity: 0; transition: opacity 0.2s;
+    pointer-events: none;
+  }
+  .modal-backdrop.open { opacity: 1; pointer-events: auto; }
+
+  .modal-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    max-width: 960px; width: 100%; max-height: 88vh;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden;
+    transform: translateY(12px); transition: transform 0.2s;
+  }
+  .modal-backdrop.open .modal-inner { transform: translateY(0); }
+
+  .modal-img-wrap { overflow: hidden; background: var(--bg3); }
+  .modal-img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+
+  .modal-text {
+    padding: 36px 32px; overflow-y: auto;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .modal-versus {
+    display: flex; align-items: center; gap: 10px;
+    padding-bottom: 20px; border-bottom: 1px solid var(--border);
+  }
+  .modal-loser    { font-size: 13px; color: #5b9bd5; font-weight: 600; }
+  .modal-sep      { font-size: 11px; color: var(--text-dim); letter-spacing: 2px; }
+  .modal-opponent { font-size: 13px; color: var(--text-sub); }
+  .modal-desc     { font-size: 14px; color: var(--text); line-height: 2.1; white-space: pre-line; flex: 1; }
+  .modal-close {
+    background: none; border: none; font-family: var(--font);
+    font-size: 11px; letter-spacing: 2px; color: var(--text-dim);
+    cursor: pointer; padding: 0; text-align: left; transition: color 0.2s;
+    align-self: flex-start;
+  }
+  .modal-close:hover { color: var(--gold); }
+
+  @media (max-width: 800px) {
+    .profile-section { grid-template-columns: 1fr; }
+    .profile-img-wrap { max-width: 240px; }
+    .setting-grid { grid-template-columns: 1fr; }
+    .trait-grid { grid-template-columns: 1fr; }
+    .defeat-gallery { grid-template-columns: repeat(2, 1fr); }
+    .modal-inner { grid-template-columns: 1fr; max-height: 92vh; }
+    .modal-img-wrap { max-height: 45vh; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo">SA DUELS</a>
+  <span class="site-divider">/</span>
+  <span class="site-breadcrumb" id="breadcrumb-name">로딩 중...</span>
+</header>
+
+<main class="page" id="main-content"></main>
+
+<!-- 모달 -->
+<div class="modal-backdrop" id="modal" onclick="handleBackdropClick(event)">
+  <div class="modal-inner">
+    <div class="modal-img-wrap">
+      <img class="modal-img" id="modal-img" src="" alt="">
+    </div>
+    <div class="modal-text">
+      <div class="modal-versus">
+        <span class="modal-loser"  id="modal-loser"></span>
+        <span class="modal-sep">VS</span>
+        <span class="modal-opponent" id="modal-opponent"></span>
+      </div>
+      <div class="modal-desc" id="modal-desc"></div>
+      <button class="modal-close" onclick="closeModal()">← 닫기</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const code   = urlParams.get('code');
+  const folder = urlParams.get('folder') || (code ? code.replace('SA_', 'S') : null);
+
+  let apostleName = '';
+
+  if (!code || !folder) {
+    document.getElementById('main-content').innerHTML = '<p class="status-msg">사도 코드를 지정해주세요.</p>';
+  } else {
+    const script = document.createElement('script');
+    script.src = `${folder}/data.js`;
+    script.onload  = () => renderProfile(SA_DATA);
+    script.onerror = () => {
+      document.getElementById('main-content').innerHTML = '<p class="status-msg">데이터를 불러올 수 없습니다.</p>';
+    };
+    document.head.appendChild(script);
+  }
+
+  function renderProfile(data) {
+    document.title = `${data.name} — SA DUELS`;
+    document.getElementById('breadcrumb-name').textContent = data.name;
+    apostleName = data.name;
+
+    const records = data.records || [];
+    const galleryHtml = records.length > 0
+      ? records.map((r, i) => `
+          <button class="defeat-photo" onclick="openModal(${i})">
+            <img src="${folder}/${r.img}" alt="" onerror="this.style.opacity=0">
+            <div class="defeat-photo-overlay">
+              <span class="defeat-photo-label">vs ${r.opponent_name}</span>
+            </div>
+          </button>`).join('')
+      : '<div class="defeat-empty">패배 기록 없음</div>';
+
+    document.getElementById('main-content').innerHTML = `
+      <section class="profile-section">
+        <div class="profile-img-wrap">
+          <img class="profile-img" src="${folder}/${data.profile_img}" alt="${data.name}" onerror="this.style.opacity=0">
+          <div class="profile-img-label">${data.code} · ${data.name_en}</div>
+        </div>
+        <div class="profile-info">
+          <div class="profile-code">${data.code}</div>
+          <h1 class="profile-name">${data.name}</h1>
+          <div class="profile-name-en">${data.name_en}</div>
+          <div class="profile-world">◈ ${data.world}</div>
+          <table class="stat-table">
+            <tr><td class="stat-label">무기</td><td class="stat-value">${data.stats.weapon}</td></tr>
+            <tr><td class="stat-label">능력</td><td class="stat-value">${data.stats.ability}</td></tr>
+            <tr><td class="stat-label">전략</td><td class="stat-value">${data.stats.strategy}</td></tr>
+            <tr><td class="stat-label">소속</td><td class="stat-value">${data.stats.affiliation}</td></tr>
+          </table>
+          <div class="trait-grid">
+            <div class="trait-box strength">
+              <div class="trait-title">${data.traits.strength.title}</div>
+              <div class="trait-body">${data.traits.strength.body}</div>
+            </div>
+            <div class="trait-box weakness">
+              <div class="trait-title">${data.traits.weakness.title}</div>
+              <div class="trait-body">${data.traits.weakness.body}</div>
+            </div>
+          </div>
+          <div class="profile-desc">${data.description}</div>
+        </div>
+      </section>
+
+      <div class="section-header">
+        <span class="section-title">홈 · 어웨이</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="setting-grid">
+        <div class="setting-box">
+          <div class="setting-tag">${data.settings.home.tag}</div>
+          <div class="setting-body">${data.settings.home.body}</div>
+        </div>
+        <div class="setting-box">
+          <div class="setting-tag">${data.settings.away.tag}</div>
+          <div class="setting-body">${data.settings.away.body}</div>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <span class="section-title">패배 기록</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="defeat-gallery">${galleryHtml}</div>`;
+
+    window._records = records;
+  }
+
+  function openModal(idx) {
+    const r = window._records[idx];
+    if (!r) return;
+    document.getElementById('modal-img').src      = `${folder}/${r.img}`;
+    document.getElementById('modal-loser').textContent    = apostleName;
+    document.getElementById('modal-opponent').textContent = r.opponent_name;
+    document.getElementById('modal-desc').textContent     = r.desc || '';
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleBackdropClick(e) {
+    if (e.target === document.getElementById('modal')) closeModal();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+
+</body>
+</html>

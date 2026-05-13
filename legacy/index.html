@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SA DUELS</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #0d0d10;
+    --bg2:      #141418;
+    --bg3:      #1c1c22;
+    --border:   #28282f;
+    --text:     #d0d0d8;
+    --text-sub: #60606a;
+    --text-dim: #38383f;
+    --accent:   #8888c0;
+    --accent-dim:#252540;
+    --radius:   8px;
+    --font:     'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── 헤더 ── */
+  .meta-header {
+    background: #09090c;
+    border-bottom: 1px solid var(--border);
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .meta-logo {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #a0a0c0;
+  }
+  .meta-tag {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--text-dim);
+  }
+
+  /* ── 메인 ── */
+  .main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 40px 60px;
+  }
+
+  .title-block {
+    text-align: center;
+    margin-bottom: 64px;
+    position: relative;
+  }
+  .title-block::before {
+    content: 'SA DUELS';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(60px, 14vw, 180px);
+    font-weight: 900;
+    color: rgba(136, 136, 192, 0.04);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: 8px;
+  }
+  .title-eyebrow {
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--text-dim);
+    margin-bottom: 18px;
+  }
+  .title-main {
+    font-size: clamp(36px, 7vw, 68px);
+    font-weight: 900;
+    letter-spacing: 8px;
+    color: #eeeef4;
+    line-height: 1;
+    margin-bottom: 18px;
+    position: relative;
+  }
+  .title-sub {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--text-sub);
+  }
+
+  /* ── 카드 그리드 ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    max-width: 720px;
+    width: 100%;
+  }
+
+  .card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 44px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .card:hover {
+    background: var(--bg3);
+    border-color: var(--accent-dim);
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.28s ease;
+  }
+  .card:hover::after { transform: scaleX(1); }
+
+  .card-label {
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    margin-bottom: 18px;
+    opacity: 0.8;
+  }
+  .card-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #eeeef4;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .card-desc {
+    font-size: 12px;
+    color: var(--text-sub);
+    line-height: 1.9;
+  }
+  .card-arrow {
+    position: absolute;
+    top: 36px; right: 36px;
+    font-size: 18px;
+    color: var(--text-dim);
+    transition: color 0.2s, transform 0.2s;
+  }
+  .card:hover .card-arrow {
+    color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  /* ── 푸터 ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 20px 40px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    text-align: center;
+  }
+
+  @media (max-width: 600px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .main { padding: 60px 20px 40px; }
+    .meta-header { padding: 12px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="meta-header">
+  <span class="meta-logo">SA DUELS</span>
+  <span class="meta-tag">INDEX</span>
+</header>
+
+<main class="main">
+  <div class="title-block">
+    <div class="title-eyebrow">SACRED AGENT DUELS</div>
+    <h1 class="title-main">SA DUELS</h1>
+    <div class="title-sub">콘텐츠 인덱스</div>
+  </div>
+
+  <div class="card-grid">
+    <a class="card" href="SA_DUEL_Archive/index.html">
+      <div class="card-label">◈ ARCHIVE</div>
+      <div class="card-title">아카이브</div>
+      <div class="card-desc">
+        SA 듀얼 협회 공식 아카이브.<br>
+        사도 프로필과 배틀 기록을 열람합니다.
+      </div>
+      <span class="card-arrow">→</span>
+    </a>
+    <a class="card" href="SA_DUEL_Story/index.html">
+      <div class="card-label">◈ STORY</div>
+      <div class="card-title">스토리</div>
+      <div class="card-desc">
+        대결별 커뮤니티 반응 아카이브.<br>
+        갤러리에 남겨진 글들을 대결 순서로 모아봅니다.
+      </div>
+      <span class="card-arrow">→</span>
+    </a>
+  </div>
+</main>
+
+<footer>SA DUELS — FAN PROJECT</footer>
+
+</body>
+</html>

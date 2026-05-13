@@ -4,12 +4,12 @@ import { getStorage } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-s
 
 // Firebase 콘솔에서 복사한 config를 여기에 붙여넣기
 const firebaseConfig = {
-  apiKey: "여기에_붙여넣기",
-  authDomain: "여기에_붙여넣기",
-  projectId: "여기에_붙여넣기",
-  storageBucket: "여기에_붙여넣기",
-  messagingSenderId: "여기에_붙여넣기",
-  appId: "여기에_붙여넣기"
+  apiKey: "AIzaSyBXurya5D6pgBkdYhydj2lX1wvktG693R4",
+  authDomain: "sa-duel.firebaseapp.com",
+  projectId: "sa-duel",
+  storageBucket: "sa-duel.firebasestorage.app",
+  messagingSenderId: "703437854571",
+  appId: "1:703437854571:web:d253e06945c3c95d07de2e"
 };
 
 const app = initializeApp(firebaseConfig);

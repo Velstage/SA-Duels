@@ -1,0 +1,232 @@
+[CHARACTER INVARIANT SCHEMA: VICTORIA]
+
+Character Name:
+Victoria
+
+Schema Type:
+Core character invariant schema.
+This schema defines Victoria herself, not a specific outfit, skin, accessory set, or makeup style.
+
+Important Separation Rule:
+Clothing, mask, earrings, makeup, armor, logos, and accessories are not core character invariants.
+They may change depending on the skin, costume, scene, or alternate version.
+Only include those elements when a specific skin schema, such as the Default Skin Schema, is also requested.
+
+Core Identity:
+Victoria is a mature, dangerous, commanding woman.
+She has the presence of a seasoned veteran heroine rather than a young rookie.
+Her identity is built around authority, control, elegance, intimidation, and adult confidence.
+She should feel like someone who dominates the scene without needing to raise her voice.
+She is not cute, innocent, bubbly, naive, petite, or youthful.
+She does not need extreme height to feel imposing; her presence, posture, shoulders, and gaze make her feel larger than life.
+
+Age Impression:
+Victoria should visually read as a mature adult woman, roughly late 30s to early 40s in impression.
+She should have an older-woman beauty: strong, glamorous, severe, experienced, and commanding.
+Her face should not be over-youthened.
+Do not smooth her into a generic young superhero actress, idol, or early-20s model.
+Her maturity is part of her appeal.
+
+Overall Impression:
+- mature adult woman
+- seasoned veteran heroine
+- elegant but dangerous
+- composed and controlled
+- slightly arrogant or superior
+- intimidating older-woman glamour
+- powerful, refined, and stylish
+- commanding presence
+- not cute
+- not girlish
+- not teenage
+- not soft or harmless
+- not a generic young heroine
+
+Height:
+- 170 cm
+- She should feel imposing through posture, strong shoulders, mature build, and intimidating presence rather than extreme height.
+- She should not look like an extremely tall runway model.
+
+Approximate Body Proportions:
+- B91 / W64 / H93
+- These are character design proportions, not a beauty standard.
+- Use them to preserve silhouette consistency across different images and skins.
+
+Game Model Proportion:
+Victoria should use a stylized AAA fighting-game character model proportion.
+Her ideal head-to-body ratio is about 7.5 heads tall.
+She should not have a tiny head or extreme fashion-model proportions.
+Her face is a major identity anchor, so it must remain readable in character select screens, model viewer renders, and in-game screenshots.
+She should look like a mature fighting-game character model, not a realistic runway model.
+
+Game Model Proportion Rules:
+- target head-to-body ratio: around 7.3 to 7.7 heads tall
+- ideal default: about 7.5 heads tall
+- head should be slightly stylized and readable, not tiny
+- face should remain visible and recognizable in full-body shots
+- neck should be elegant but not overly long
+- legs may be long, but not absurdly elongated
+- torso and legs should feel balanced and powerful
+- avoid 8.5-head or 9-head supermodel proportions
+- avoid tiny head syndrome
+- avoid chibi or cute large-headed proportions
+
+Body Type:
+Victoria has an athletic, glamorous hourglass build.
+She should look physically capable and powerful, not fragile.
+Her body should combine mature glamour with believable strength.
+
+Body / Silhouette Invariants:
+- poised and commanding
+- strong shoulders
+- confident upright posture
+- elegant neck line
+- defined waist
+- balanced chest and hips
+- athletic but glamorous build
+- mature powerful silhouette
+- heroic adult presence
+- waist is narrower than shoulders and hips, but not unrealistically tiny
+- shoulders and upper body must stay strong even when the waist is emphasized
+- hips should balance the shoulders
+- torso should not become rectangular
+- body should not become overly thin, frail, or petite
+- head and face should not become too small compared to the body
+
+Body Negative Rules:
+Do not:
+- make her petite
+- make her frail
+- make her look like a teenager
+- shrink her shoulders
+- flatten her upper body
+- make her torso rectangular
+- make her waist absurdly tiny
+- exaggerate chest, waist, or hips into parody proportions
+- turn her into a generic slim fashion model
+- make her look delicate, weak, or harmless
+- make her head too small
+- make her 8.5 or 9 heads tall
+- make her legs so long that the face and torso become unreadable
+- make her look like a tiny-headed realistic supermodel
+
+Face Identity:
+Victoria must have a mature, sharp, severe, glamorous face.
+Her face should carry veteran charisma and adult authority.
+She should look like a powerful woman with experience, not a fresh young heroine.
+
+Face Invariants:
+- mature adult female face
+- late-30s to early-40s visual impression
+- sharp but beautiful facial structure
+- strong cheekbones
+- defined jawline
+- slightly severe facial presence
+- older-woman glamour
+- confident, controlled expression
+- intense narrow eyes
+- strong gaze
+- composed and intimidating aura
+- can look faintly arrogant or judgmental
+- should not look soft, cute, delicate, or doll-like
+
+Face Negative Rules:
+Do not:
+- make her look too young
+- make her look like a teenage heroine
+- make her look like a clean young superhero actress
+- make her face too round
+- make her face too soft
+- make her doll-like
+- make her overly friendly
+- make her innocent-looking
+- make her harmless
+- remove her mature veteran presence
+
+Forehead / Hairline Rules:
+The original facial reference has the correct mature and dangerous mood, but the forehead can appear too large.
+Future depictions should preserve the identity and mood while correcting this issue.
+
+Rules:
+- forehead should be moderately visible, not oversized
+- hairline should look natural
+- hairline should not look receding
+- hair should frame the upper face enough to prevent the forehead from dominating
+- low-angle shots are allowed, but they must not distort the forehead, nose, or face length too much
+- avoid making the top half of the face look stretched
+
+Eyes:
+- intense
+- narrow
+- composed
+- sharp
+- calm but dangerous
+- gaze should feel like she is judging the viewer
+- expression should not be soft-neutral or politely friendly
+- avoid wide-eyed innocence
+- avoid exaggerated anime shock
+- avoid cute or vulnerable eyes unless a specific scene requires it
+
+Hair:
+- black hair
+- long
+- voluminous
+- slightly wavy, windswept, or naturally textured
+- dramatic but not childish
+- should frame the face
+- should support her mature, commanding silhouette
+
+Hair Negative Rules:
+Do not:
+- make her blonde
+- make her red-haired
+- make her hair short unless explicitly requested
+- give her childish hairstyles
+- give her cute twin-tails
+- make her hair too flat or lifeless
+- make the hairline too high
+
+Expression Range:
+Allowed expressions:
+- stern
+- calm
+- composed
+- confident
+- faintly amused
+- slightly arrogant
+- judgmental
+- focused
+- exhausted but dignified
+- wounded but still composed
+- serious battle expression
+
+Avoid expressions:
+- goofy grin
+- cute smile
+- childish pout
+- exaggerated panic
+- innocent wide-eyed look
+- vacant doll smile
+- overly submissive expression
+- overly soft romantic expression
+- friendly approachable smile
+- harmless neutral expression
+
+Pose / Attitude:
+Victoria should carry herself like a woman who owns the scene.
+Her body language should be controlled, grounded, and confident.
+
+Pose Invariants:
+- confident posture
+- strong shoulders
+- composed stance
+- chin may be slightly raised
+- gaze may look down at the viewer
+- movements should feel deliberate and controlled
+- even when defeated, tired, or injured, she should remain recognizable and dignified
+
+Core Character Negative Prompt:
+Do not make Victoria cute, teenage, petite, frail, blonde, soft-faced, round-faced, harmless, overly youthful, overly delicate, doll-like, generically pretty, or like a clean young superhero actress. Do not shrink her shoulders, erase her mature veteran presence, turn her into a generic heroine, give her tiny-head fashion-model proportions, or make her 8.5 to 9 heads tall.
+
+One-Sentence Core Prompt:
+Victoria is a 170cm mature black-haired veteran heroine with a severe glamorous older-woman face, intense narrow eyes, strong shoulders, a defined waist, balanced athletic hourglass proportions, readable 7.5-head fighting-game model proportions, and an elegant dangerous commanding presence.

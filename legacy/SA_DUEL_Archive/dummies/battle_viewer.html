@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>패배 기록 — SA DUELS</title>
+<link rel="stylesheet" href="../sa.css">
+<style>
+  .defeat-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .defeat-img-wrap {
+    position: sticky; top: 24px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .defeat-img { width: 100%; display: block; object-fit: cover; }
+
+  .defeat-content { display: flex; flex-direction: column; gap: 28px; }
+
+  .defeat-header { display: flex; flex-direction: column; gap: 6px; }
+  .defeat-title  { font-size: 24px; font-weight: 700; color: #eeeef2; letter-spacing: 1px; }
+  .defeat-versus {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .versus-loser    { font-size: 13px; color: #5b9bd5; font-weight: 600; }
+  .versus-sep      { font-size: 11px; color: var(--text-dim); letter-spacing: 2px; }
+  .versus-opponent { font-size: 13px; color: var(--text-sub); }
+
+  .defeat-desc {
+    font-size: 14px; color: var(--text);
+    line-height: 2.1; white-space: pre-line;
+    border-top: 1px solid var(--border); padding-top: 24px;
+  }
+
+  .back-link {
+    display: inline-block; font-size: 11px; letter-spacing: 2px;
+    color: var(--text-dim); text-decoration: none; transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--gold); }
+
+  @media (max-width: 800px) {
+    .defeat-layout { grid-template-columns: 1fr; gap: 28px; }
+    .defeat-img-wrap { position: static; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo">SA DUELS</a>
+  <span class="site-divider">/</span>
+  <a href="#" class="site-breadcrumb" id="breadcrumb-loser">…</a>
+</header>
+
+<main class="page" id="main-content">
+  <div class="status-msg">로딩 중...</div>
+</main>
+
+<script>
+  const SA_FOLDER = {
+    "SA_247":"S001","SA_083":"S002","SA_512":"S003","SA_361":"S004",
+    "SA_178":"S005","SA_634":"S006","SA_429":"S007","SA_756":"S008"
+  };
+
+  const code = new URLSearchParams(window.location.search).get('code');
+
+  if (!code) {
+    document.getElementById('main-content').innerHTML = '<div class="status-msg">코드를 지정해주세요.</div>';
+  } else {
+    const s = document.createElement('script');
+    s.src = code + '/scenes.js';
+    s.onload  = () => render(BATTLE);
+    s.onerror = () => {
+      document.getElementById('main-content').innerHTML = '<div class="status-msg">데이터를 불러올 수 없습니다.</div>';
+    };
+    document.head.appendChild(s);
+  }
+
+  function render(data) {
+    document.title = data.loser_name + ' 패배 — SA DUELS';
+
+    const loserFolder = SA_FOLDER[data.loser] || data.loser.replace('SA_','S');
+    const loserLink   = document.getElementById('breadcrumb-loser');
+    loserLink.textContent = data.loser_name;
+    loserLink.href = `../SA/viewer.html?code=${data.loser}&folder=${loserFolder}`;
+
+    document.getElementById('main-content').innerHTML = `
+      <div class="defeat-layout">
+        <div class="defeat-img-wrap">
+          <img class="defeat-img" src="${code}/${data.img}" alt="${data.loser_name} 패배"
+               onerror="this.parentElement.style.minHeight='300px'">
+        </div>
+        <div class="defeat-content">
+          <div class="defeat-header">
+            <div class="defeat-title">${data.loser_name}</div>
+            <div class="defeat-versus">
+              <span class="versus-loser">${data.loser_name}</span>
+              <span class="versus-sep">VS</span>
+              <span class="versus-opponent">${data.opponent_name}</span>
+            </div>
+          </div>
+          <div class="defeat-desc">${data.desc}</div>
+          <a class="back-link" href="../SA/viewer.html?code=${data.loser}&folder=${loserFolder}">← 돌아가기</a>
+        </div>
+      </div>`;
+  }
+</script>
+</body>
+</html>
