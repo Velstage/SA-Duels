@@ -6,9 +6,12 @@ import {
   ref, uploadBytes, getDownloadURL
 } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-storage.js";
 
-const params = new URLSearchParams(location.search);
-const charId = params.get("id");
+const charId = location.hash.slice(1);
 
+if (!charId) {
+  document.body.innerHTML = "<p style='padding:40px;color:#666'>캐릭터를 찾을 수 없습니다.</p>";
+  throw new Error("No character id");
+}
 const charDoc = await getDoc(doc(db, "characters", charId));
 if (!charDoc.exists()) {
   document.body.innerHTML = "<p style='padding:40px;color:#666'>캐릭터를 찾을 수 없습니다.</p>";
@@ -18,7 +21,7 @@ const char = charDoc.data();
 
 document.title = `${char.name} — SA_duel`;
 document.getElementById("page-title").textContent = char.name;
-document.getElementById("profile-thumb").src = char.thumbnailUrl || "";
+document.getElementById("profile-thumb").src = `https://firebasestorage.googleapis.com/v0/b/sa-duel.firebasestorage.app/o/thumbnails%2F${char.nameEn.toLowerCase()}_facial.png?alt=media`;
 document.getElementById("profile-thumb").alt = char.name;
 document.getElementById("profile-name").textContent = `${char.name}  ${char.nameEn}`;
 document.getElementById("profile-origin").textContent = char.origin;

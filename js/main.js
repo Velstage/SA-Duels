@@ -13,10 +13,10 @@ snapshot.forEach(docSnap => {
   const id = docSnap.id;
   const char = docSnap.data();
   const card = document.createElement("a");
-  card.href = `character.html?id=${id}`;
+  card.href = `character#${id}`;
   card.className = "character-card";
   card.innerHTML = `
-    <img class="thumb" src="${char.thumbnailUrl || ''}"
+    <img class="thumb" src="https://firebasestorage.googleapis.com/v0/b/sa-duel.firebasestorage.app/o/thumbnails%2F${char.nameEn.toLowerCase()}_profile.png?alt=media"
          onerror="this.style.background='var(--bg3)';this.style.display='block'"
          alt="${char.name}">
     <div class="info">
